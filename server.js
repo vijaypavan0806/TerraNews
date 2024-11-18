@@ -38,7 +38,7 @@ passport.use(
         {
             clientID: '403943212279-rhgavnugudqk0o7v7upijehmcrm78k96.apps.googleusercontent.com',
             clientSecret: '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',
-            callbackURL: 'http://localhost:3000/auth/google/callback',
+            callbackURL: 'https://terranews.vercel.app/auth/google/callback',
         },
         (accessToken, refreshToken, profile, done) => {
             const user = {
