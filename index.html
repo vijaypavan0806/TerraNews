@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>terraNews | Sign in</title>
+    <link rel="stylesheet" href="terranewsstyles.css">
+</head>
+<body>
+    <header>
+        <img class="headerlogo" src="terranewstitle.png" alt="terranews" height="80px">
+    </header>
+    <div class="logincontainer">
+        <p>Sign-in through </p>
+        <img src="googlelogo.png" alt="Google Logo" width="120px">
+        <button id="loginBtn">Sign in with Google</button>
+    </div>
+    <script>
+        document.getElementById('loginBtn').addEventListener('click', function () {
+            window.location.href = '/auth/google';
+        });
+    </script>
+</body>
+</html>
