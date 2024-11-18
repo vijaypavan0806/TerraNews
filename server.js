@@ -38,7 +38,7 @@ passport.use(
         {
             clientID: '403943212279-rhgavnugudqk0o7v7upijehmcrm78k96.apps.googleusercontent.com',
             clientSecret: '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',
-            callbackURL: '/auth/google/callback',
+            callbackURL: 'http://localhost:3000/auth/google/callback',
         },
         (accessToken, refreshToken, profile, done) => {
             const user = {
@@ -105,5 +105,6 @@ app.use((err, req, res, next) => {
 
 // Start the server
 app.listen(PORT, () => {
-    
+    console.log(`Server running on http://localhost:${PORT}`);
 });
+
