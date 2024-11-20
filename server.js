@@ -2,28 +2,24 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const path = require('path'); // Import path module
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware for serving static files
-app.use(express.static(__dirname)); // Serve all files from the current folder
+app.use(express.static(__dirname));
 
-// Middleware for session management
 app.use(
     session({
-        secret: 'abcdefabcdefabcdefabcdefabcdefabcdef65', // Replace with a secure key
+        secret: 'abcdefabcdefabcdefabcdefabcdefabcdef65',
         resave: false,
         saveUninitialized: true,
     })
 );
 
-// Initialize Passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Passport serialization and deserialization
 passport.serializeUser((user, done) => {
     done(null, user);
 });
@@ -32,7 +28,6 @@ passport.deserializeUser((user, done) => {
     done(null, user);
 });
 
-// Configure Google OAuth Strategy
 passport.use(
     new GoogleStrategy(
         {
@@ -52,20 +47,16 @@ passport.use(
     )
 );
 
-// Routes
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Google OAuth login route
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-// Google OAuth callback route
 app.get(
     '/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/' }),
     (req, res) => {
-        // Redirect to /home after successful login
         res.redirect('/home');
     }
 );
@@ -78,7 +69,6 @@ app.get('/home', (req, res) => {
     }
 });
 
-// Logout route
 app.get('/auth/logout', (req, res) => {
     req.logout(err => {
         if (err) {
@@ -88,7 +78,6 @@ app.get('/auth/logout', (req, res) => {
     });
 });
 
-// API endpoint to fetch user details
 app.get('/auth/user', (req, res) => {
     if (req.isAuthenticated()) {
         res.json(req.user);
@@ -97,14 +86,11 @@ app.get('/auth/user', (req, res) => {
     }
 });
 
-// Error handling
 app.use((err, req, res, next) => {
     console.error('Error:', err.message);
     res.status(500).json({ error: 'Internal server error' });
 });
 
-// Start the server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
-
