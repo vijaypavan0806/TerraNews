@@ -31,76 +31,59 @@
                 <div class="news">
                     <img class="newsimage" src="newsimage1.jpeg">
                     <p class="newstitle">Devara</p>
-                    <p class="newscontent">
-                    </p>
+                    <p class="newscontent"></p>
                 </div>
                 <div class="seperation"></div>
                 <div class="news">
                     <img class="newsimage" src="newsimage1.jpeg">
                     <p class="newstitle">graVITas'24</p>
-                    <p class="newscontent">
-                    </p>
+                    <p class="newscontent"></p>
                 </div>
                 <div class="seperation"></div>
                 <div class="news">
                     <img class="newsimage" src="newsimage1.jpeg">
                     <p class="newstitle">IND vs AUS</p>
-                    <p class="newscontent">
-                    </p>
+                    <p class="newscontent"></p>
                 </div>
                 <div class="seperation"></div>
                 <div class="news">
                     <img class="newsimage" src="newsimage1.jpeg">
                     <p class="newstitle">OG - Movie</p>
-                    <p class="newscontent">
-                    </p>
+                    <p class="newscontent"></p>
                 </div>
                 <div class="seperation"></div>
                 <div class="news">
                     <img class="newsimage" src="newsimage1.jpeg">
                     <p class="newstitle">OG - Movie</p>
-                    <p class="newscontent">
-                    </p>
+                    <p class="newscontent"></p>
                 </div>
                 <div class="seperation"></div>
                 <div class="news">
                     <img class="newsimage" src="newsimage1.jpeg">
                     <p class="newstitle">OG - Movie</p>
-                    <p class="newscontent">
-                    </p>
+                    <p class="newscontent"></p>
                 </div>
                 <div class="seperation"></div>
                 <div class="news">
                     <img class="newsimage" src="newsimage1.jpeg">
                     <p class="newstitle">OG - Movie</p>
-                    <p class="newscontent">
-                    </p>
+                    <p class="newscontent"></p>
                 </div>
                 <div class="seperation"></div>
                 <div class="news">
                     <img class="newsimage" src="newsimage1.jpeg">
                     <p class="newstitle">OG - Movie</p>
-                    <p class="newscontent">
-                    </p>
-                </div>
-                <div class="seperation"></div>
-                <div class="news">
-                    <img class="newsimage" src="newsimage1.jpeg">
-                    <p class="newstitle">OG - Movie</p>
-                    <p class="newscontent">
-                    </p>
+                    <p class="newscontent"></p>
                 </div>
             </div>
         </section>
     </div>
-    <footer>
-        
-    </footer>
+    <footer></footer>
     <script>
         let curnews = "location";
-    let x = document.getElementById('location');
-        function sportsclick()
-        {
+        let x = document.getElementById('location');
+        
+        function sportsclick() {
             document.getElementById('sports').style.color = 'rgb(0, 179, 255)';
             document.getElementById('international').style.color = 'rgb(255, 255, 255)';
             document.getElementById('trending').style.color = 'rgb(255, 255, 255)';
@@ -108,8 +91,8 @@
             fetchNews("sports");
             curnews = "sports";
         }
-        function internationalclick()
-        {
+        
+        function internationalclick() {
             document.getElementById('international').style.color = 'rgb(0, 179, 255)';
             document.getElementById('sports').style.color = 'rgb(255, 255, 255)';
             document.getElementById('entertainment').style.color = 'rgb(255, 255, 255)';
@@ -117,8 +100,8 @@
             fetchNews("international");
             curnews = "international";
         }
-        function trendingclick()
-        {
+
+        function trendingclick() {
             document.getElementById('trending').style.color = 'rgb(0, 179, 255)';
             document.getElementById('sports').style.color = 'rgb(255, 255, 255)';
             document.getElementById('entertainment').style.color = 'rgb(255, 255, 255)';
@@ -126,8 +109,8 @@
             fetchNews("trending");
             curnews = "trending";
         }
-        function entertainmentclick()
-        {
+
+        function entertainmentclick() {
             document.getElementById('entertainment').style.color = 'rgb(0, 179, 255)';
             document.getElementById('sports').style.color = 'rgb(255, 255, 255)';
             document.getElementById('international').style.color = 'rgb(255, 255, 255)';
@@ -135,162 +118,100 @@
             fetchNews("entertainment");
             curnews = "entertainment";
         }
-        let searchelement = '';
-
         
+        let searchelement = '';
         let se = 1;
+
         function searchenable() {
-            if (se == 1)
-            {
+            if (se == 1) {
                 document.getElementById('navi').style.display = 'none';
                 document.getElementById('searchtext').style.display = 'inline';
                 se = 0;
-                document.getElementById('searchtext').addEventListener('keydown', function (event) 
-                {
-                    if (event.keyCode === 13)
-                    {
+                document.getElementById('searchtext').addEventListener('keydown', function (event) {
+                    if (event.keyCode === 13) {
                         event.preventDefault();
                         searchelement = this.value;
                         fetchNews(searchelement);
                     }
                 });
-            }
-            else
-            {
+            } else {
                 document.getElementById('navi').style.display = 'inline';
                 document.getElementById('searchtext').style.display = 'none';
                 fetchNews(curnews);
                 se = 1;
             }
         }
-    // Fetch user details
-    fetch('/auth/user')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Safely access the username, defaulting to 'Guest' if undefined
-            const username = data.username || 'Guest';
-            document.getElementById('username').textContent = username;
-        })
-        .catch(error => {
-            console.error('Failed to fetch user details:', error);
-            document.getElementById('username').textContent = 'Guest';
-        });
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
-    } else {
-        alert("Geolocation is not supported by this browser.");
-    }
-
-    function showPosition(position) {
-        let latitude = position.coords.latitude;
-        let longitude = position.coords.longitude;
-        getLocationDetails(latitude, longitude);
-    }
-
-    function getLocationDetails(lat, lon) {
-        // Use OpenCage API with your key (replace 'YOUR_API_KEY' with your actual API key)
-        const apiKey = '279493c0c7984283b0c27e920dd831e0';
-        const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${apiKey}`;
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data.results && data.results.length > 0) {
-                    const state = data.results[0].components.state || "Unknown State";
-                    const country = data.results[0].components.country || "Unknown Country";
-                    const locationText = state + ", " + country;
-                    document.getElementById("location").innerHTML = locationText;
-
-                    // Now fetch the news for this location
-                    fetchNews(locationText);
-                } else {
-                    document.getElementById("location").innerHTML = "State and Country: Not found";
+        fetch('/auth/user')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
+                return response.json();
+            })
+            .then(data => {
+                const username = data.username || 'Guest';
+                document.getElementById('username').textContent = username;
             })
             .catch(error => {
-                console.error('Error fetching location data:', error);
-                document.getElementById("location").innerHTML = "State and Country: Error";
+                console.error('Failed to fetch user details:', error);
+                document.getElementById('username').textContent = 'Guest';
             });
-    }
 
-    function fetchNews(x) {
-        const newsApiKey1 = '39c3025e706146f99c1db7b6e2295f6e';
-        const newsApiKey2 = '2aa34c1e31684f62935fea779929998b';
-        const newsApiUrl = `https://newsapi.org/v2/everything?q=${x}&apiKey=${newsApiKey2}`;
-
-        fetch(newsApiUrl)
-            .then(response => response.json())
-            .then(data => {
-                if (data.articles && data.articles.length > 0) {
-                    // Clear existing news
-                    const newsContainer = document.querySelector('.scroll-container');
-                    newsContainer.innerHTML = ''; // Clear existing news
-
-                    // Loop through each article and create a new news section
-                    data.articles.forEach(article => {
-                        const newsElement = document.createElement('div');
-                        newsElement.classList.add('news');
-
-                        // Create and add the news image
-                        const image = document.createElement('img');
-                        image.classList.add('newsimage');
-                        image.src = article.urlToImage || 'default-image.jpg'; // Default image if none exists
-
-                        // Create and add the news title
-                        const title = document.createElement('p');
-                        title.classList.add('newstitle');
-                        title.textContent = article.title;
-
-                        // Create and add the news content
-                        const content = document.createElement('p');
-                        content.classList.add('newscontent');
-                        content.textContent = article.description || 'No description available.';
-
-                        // Append elements to the news element
-                        newsElement.appendChild(image);
-                        newsElement.appendChild(title);
-                        newsElement.appendChild(content);
-
-                        // Add the news element to the scroll container
-                        newsContainer.appendChild(newsElement);
-
-                        // Add a separator after each news
-                        const separator = document.createElement('div');
-                        separator.classList.add('seperation');
-                        newsContainer.appendChild(separator);
-                    });
-                } else {
-                    console.log('No news found for this location.');
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching news:', error);
-            });
-    }
-
-    function showError(error) {
-        switch(error.code) {
-            case error.PERMISSION_DENIED:
-                alert("User denied the request for Geolocation.");
-                break;
-            case error.POSITION_UNAVAILABLE:
-                alert("Location information is unavailable.");
-                break;
-            case error.TIMEOUT:
-                alert("The request to get user location timed out.");
-                break;
-            case error.UNKNOWN_ERROR:
-                alert("An unknown error occurred.");
-                break;
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
         }
-    }
-</script>
-    
+
+        function showPosition(position) {
+            let latitude = position.coords.latitude;
+            let longitude = position.coords.longitude;
+            getLocationDetails(latitude, longitude);
+        }
+
+        function getLocationDetails(lat, lon) {
+            const apiKey = '279493c0c7984283b0c27e920dd831e0';
+            const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${apiKey}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.results && data.results.length > 0) {
+                        const state = data.results[0].components.state || "Unknown State";
+                        const country = data.results[0].components.country || "Unknown Country";
+                        const locationText = state + ", " + country;
+                        document.getElementById("location").innerHTML = locationText;
+                        fetchNews(locationText);
+                    } else {
+                        document.getElementById("location").innerHTML = "State and Country: Not found";
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching location data:', error);
+                    document.getElementById("location").innerHTML = "State and Country: Error";
+                });
+        }
+
+        function fetchNews(x) {
+            const newsApiKey2 = '2aa34c1e31684f62935fea779929998b';
+            const newsApiUrl = `https://newsapi.org/v2/everything?q=${x}&apiKey=${newsApiKey2}`;
+
+            fetch(newsApiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const newsArray = data.articles;
+                    for (let i = 0; i < 8; i++) {
+                        const news = newsArray[i];
+                        document.getElementsByClassName('newscontent')[i].innerText = news.description;
+                        document.getElementsByClassName('newstitle')[i].innerText = news.title;
+                        document.getElementsByClassName('newsimage')[i].src = news.urlToImage;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching news:', error);
+                });
+        }
+    </script>
 </body>
 </html>
